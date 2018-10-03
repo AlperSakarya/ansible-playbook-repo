@@ -1,0 +1,13 @@
+# Sample using key data from a local file on the management machine
+# FLEET_NAME defined in hosts file
+
+- name: adding myname.pub to FLEET_NAME
+  hosts: FLEEt_NAME
+  remote_user: root
+
+  tasks:
+
+    - name: adding the key 
+      authorized_key:
+        user: root
+        key:  "{{ lookup('file', '/home/alper/.ssh/alper.pub') }}"

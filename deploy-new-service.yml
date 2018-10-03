@@ -1,0 +1,20 @@
+- name: Deploying new service to FLEET_NAME servers
+  hosts: FLEET_NAME
+  remote_user: root
+
+  tasks:
+
+    - name: Create service folder
+      file: path=/srv/myservice/ state=directory
+
+    - name: Adding the repo key temporarily
+      copy: src=/etc/ansible/files/id_rsa dest=/root/.ssh/id_rsa owner=root group=root mode=0600
+
+    - name: Accept bitbucket hostkey
+      shell: ssh-keyscan -H bitbucket.org >> /etc/ssh/ssh_known_hosts
+
+    - name: Clone REPO_NAME repository
+      git: repo=git@bitbucket.org:ACCOUNT_NAME/REPO_NAME.git dest=/srv/myservice/ accept_hostkey=yes
+
+    - name: Delete keys
+      command: mv /root/.ssh/id_rsa /dev/null

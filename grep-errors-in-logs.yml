@@ -1,0 +1,8 @@
+- name: Grepping for errors in Logs 
+  hosts: FLEET_NAME
+  remote_user: root
+
+  tasks:
+
+    - name: Delete keys
+      command: grep ERROR /var/log/myLOG > /tmp/timeouts.txt
