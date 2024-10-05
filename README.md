@@ -18,7 +18,7 @@ This playbook adds a public SSH key to a set of servers, allowing secure access 
     - name: adding the key
       authorized_key:
         user: root
-        key: "{{ lookup('file', '/home/alper/.ssh/alper.pub') }}"
+        key: "{{ lookup('file', '/home/yourUserName/.ssh/yourKeyName.pub') }}"
 ```
 
 ### 2. `deploy-new-service.yml`
